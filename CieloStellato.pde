@@ -110,20 +110,24 @@ class CieloStellato {
       this.raggioStelle[i] = random(minR, maxR);
       this.angoloStelle[i] = random(minAngle, maxAngle);
       
-      this.distanzaStelle[i] = random(-height / 4, height / 4);
+      this.distanzaStelle[i] = random(-height, height);
       
       this.stelle[i] = new Sole(0, 0, 0, this.raggioStelle[i], 200, 100, randomColoreStella(), randomColoreStella());
     }
   }
 
   public void display(){
+    this.display(0.005, 2);
+  }
+
+  public void display(float speed, float period){
     for(int i = 0; i < this.getNumStelle(); i++){
       this.stelle[i].setX((height + this.distanzaStelle[i] + random(2)) * cos(this.angoloStelle[i]) + this.raggioStelle[i]);
-      this.stelle[i].setY((height / 2 + this.distanzaStelle[i] + random(2)) * sin(angoloStelle[i]) + this.raggioStelle[i]);
+      this.stelle[i].setY((height / period + this.distanzaStelle[i] + random(2)) * sin(angoloStelle[i]) + this.raggioStelle[i]);
       
       this.stelle[i].display();
       
-      this.angoloStelle[i] += 0.005;
+      this.angoloStelle[i] += speed;
     }
   }
     
