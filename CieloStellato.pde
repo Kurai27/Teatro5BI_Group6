@@ -1,4 +1,4 @@
-/** Classe CieloStellato
+/** Classe Cielo
   *
   * @author Luciano Mateias
 */

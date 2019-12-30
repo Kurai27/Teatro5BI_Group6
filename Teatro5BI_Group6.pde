@@ -2,12 +2,16 @@ CieloStellato cieloGrande;
 CieloStellato cieloPiccolo;
 PuntoLuminoso stellaPolare; 
 
-float i;
+int i;
+
+Cielo cielo;
 
 void setup() {
 
   size(1920, 1080);
-  frameRate(30);
+  frameRate(24);
+
+  cielo = new Cielo();
 
   this.cieloGrande = new CieloStellato(750, 0, 3, 0, 2 * PI);
   this.cieloPiccolo = new CieloStellato(500, 0, 1, 0, 2 * PI);
@@ -26,8 +30,7 @@ void setup() {
 
 void draw() {
 
-  fill(52, 28, 144, i);
-  rect(0, 0, width, height);
+  cielo.display(i);
 
   pushMatrix();
 
@@ -43,5 +46,5 @@ void draw() {
   fill(52, 28, 144, 255);
   rect(0, height / 2, width, height);
 
-  i = (i / 2) + 1;
+  i = int((i / 2) + 1);
 }
