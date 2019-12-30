@@ -1,9 +1,9 @@
-/** Classe CieloStellato
+/** Classe Cielo
   *
   * @author Luciano Mateias
 */
 
-int [] defaultGradientColori3 = new int[]{
+color [] defaultColoreGradienti = {
   color(0.0, 0.0, 12.0), color(25.0, 22.0, 33.0), color(32.0, 32.0, 44.0), color(58.0, 58.0, 82.0),
   color(81.0, 81.0, 117.0), color(138.0, 118.0, 171.0), color(205.0, 130.0, 160.0), color(234.0, 176.0, 209.0),
   color(235.0, 178.0, 177.0), color(177.0, 181.0, 234.0), color(148.0, 223.0, 255.0), color(103.0, 209.0, 251.0),
@@ -14,36 +14,64 @@ int [] defaultGradientColori3 = new int[]{
 
 class Cielo {
 
-  float step;
+  private int step;
   
-  public Cielo(float step){
+  /** Crea un cielo che procede
+    * con un dato ritmo
+    *
+    * @param step numero di fasi impiegate
+    *        dal cielo per avanzare di un'ora
+  */
+  public Cielo(int step){
     
     this.step = step;
 
   }
   
+  /** Crea un cielo che procede
+    * con un ritmo di 24 fotogrammi
+    * per ogni ora del giorno
+    *
+    * @param step numero di fasi impiegate
+    *        dal cielo per avanzare di un'ora
+  */
   public Cielo(){
     
     this(24);
     
   }
   
-  void display(int alpha){
+  /** Disegna il cielo
+    *
+    * @param alpha valore alpha del
+    *        cielo da disegnare
+  */
+  public void display(int alpha){
     
-    int currentIndex = (frameCount / 24) % 24;
+    int currentIndex = (frameCount / this.step) % this.step;
     
-    color c1 = defaultGradientColori3[currentIndex] & 0xffffff | (alpha << 24);
-    color c2 = defaultGradientColori3[(currentIndex + 1) % 24]  & 0xffffff | (alpha << 24);
+    color c1 = defaultColoreGradienti[currentIndex] & 0xffffff | (alpha << 24);
+    color c2 = defaultColoreGradienti[(currentIndex + 1) % 24]  & 0xffffff | (alpha << 24);
 
     gradiente(0, height, c1, c2);
     
   }
   
-  void display(){
+  /**
+    Disegna il cielo
+  */
+  public void display(){
     this.display(255);
   }
   
-  void gradiente(int y0, int y1, color c1, color c2) {
+  /** Colora il canvas gradualmente
+    *
+    * @param y0 coordinata y di partenza del gradiente
+    * @param y1 coordinata y di arrivo del gradiente
+    * @param c1 colore di partenza
+    * @param c2 colore di arrivo
+  */
+  public void gradiente(int y0, int y1, color c1, color c2) {
 
     push();
   
@@ -55,6 +83,15 @@ class Cielo {
     }
   
     pop();
+  }
+  
+  public int getStep(){
+    return this.step;
+  }
+  
+  public void setStep(int step){
+    if(step > 0)
+      this.step = step;
   }
   
 }
