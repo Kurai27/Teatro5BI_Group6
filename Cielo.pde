@@ -16,14 +16,18 @@ class Cielo {
 
   private int step;
   
+  private int start;
+  
   /** Crea un cielo che procede
     * con un dato ritmo
     *
+    * @param start ora di partenza
     * @param step numero di fasi impiegate
     *        dal cielo per avanzare di un'ora
   */
-  public Cielo(int step){
+  public Cielo(int start, int step){
     
+    this.start = start;
     this.step = step;
 
   }
@@ -37,7 +41,7 @@ class Cielo {
   */
   public Cielo(){
     
-    this(24);
+    this(0, 24);
     
   }
   
@@ -48,7 +52,9 @@ class Cielo {
   */
   public void display(int alpha){
     
-    int currentIndex = (frameCount / this.step) % this.step;
+    int currentIndex = (frameCount / this.step + this.start) % this.step;
+    
+    System.out.println(currentIndex);
     
     color c1 = defaultColoreGradienti[currentIndex] & 0xffffff | (alpha << 24);
     color c2 = defaultColoreGradienti[(currentIndex + 1) % 24]  & 0xffffff | (alpha << 24);
