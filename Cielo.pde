@@ -52,7 +52,7 @@ class Cielo {
   */
   public void display(int alpha){
     
-    int currentIndex = (frameCount / this.step + this.start) % this.step;
+    int currentIndex = (frameCount / this.step + this.start) % 24;
     
     System.out.println(currentIndex);
     

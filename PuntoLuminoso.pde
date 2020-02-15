@@ -67,7 +67,6 @@ class PuntoLuminoso {
   public void display() {
     
     ellipseMode(RADIUS);
-    
     // Disegno il Punto
     stroke(this.coloreLuce);
     fill(this.colorePunto);
@@ -81,6 +80,7 @@ class PuntoLuminoso {
       stroke(this.coloreLuce, alpha);
       ellipse(this.x, this.y, i, i); 
     }
+    noStroke();
     
   }
 
